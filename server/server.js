@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3001;
-const userRoutes = require('./routes/user-routes');
+const PORT = process.env.PORT || 4000;
+const userRoutes = require('./routes/api/user-routes');
 
 // express middleware, used to be bodyparser
 app.use(express.json());
