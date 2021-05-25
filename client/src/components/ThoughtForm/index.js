@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import React, { useRef } from 'react';
 
 const ThoughtForm = () => {
   const [formState, setFormState] = useState({
@@ -6,6 +7,7 @@ const ThoughtForm = () => {
     thought: "",
   });
   const [characterCount, setCharacterCount] = useState(0);
+  const fileInput = useRef(null);
 
   // update state based on form input changes
   const handleChange = (event) => {
@@ -37,6 +39,32 @@ const ThoughtForm = () => {
     setCharacterCount(0);
   };
 
+  const handleImageUpload = event => {
+    event.preventDefault();
+    const data = new FormData();
+    data.append('image', fileInput.current.files[0]);
+    // send image file to endpoint with the postImage function
+    const postImage = async () => {
+      try {
+        const res = await fetch('/api/image-upload', {
+          mode: 'cors',
+          method: 'POST',
+          body: data
+        })
+        if (!res.ok) throw new Error(res.statusText);
+        const postResponse = await res.json();
+        setFormState({ ...formState, image: postResponse.Location })
+
+        return postResponse.Location;
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    postImage();
+
+    // ...
+  };
+
   return (
     <div>
       <p className={`m-0 ${characterCount === 280 ? "text-error" : ""}`}>
@@ -46,6 +74,20 @@ const ThoughtForm = () => {
         className="flex-row justify-center justify-space-between-md align-stretch"
         onSubmit={handleFormSubmit}
       >
+        <input
+          placeholder="Name"
+          name="username"
+          value={formState.username}
+          className="form-input col-12 "
+          onChange={handleChange}
+        ></input>
+        <textarea
+          placeholder="Here's a new thought..."
+          name="thought"
+          value={formState.thought}
+          className="form-input col-12 "
+          onChange={handleChange}
+        ></textarea>
         <label className="form-input col-12  p-1">
           Add an image to your thought:
         <input
@@ -61,20 +103,6 @@ const ThoughtForm = () => {
             Upload
           </button>
         </label>
-        <input
-          placeholder="Name"
-          name="username"
-          value={formState.username}
-          className="form-input col-12 "
-          onChange={handleChange}
-        ></input>
-        <textarea
-          placeholder="Here's a new thought..."
-          name="thought"
-          value={formState.thought}
-          className="form-input col-12 "
-          onChange={handleChange}
-        ></textarea>
         <button className="btn col-12 " type="submit">
           Submit
         </button>
