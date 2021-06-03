@@ -12,11 +12,12 @@ An application using AWS cloud services for storage, database and deployment. As
 
 ## Technologies
 
-* Amazon Web Services
+* Identity and Access Management (IAM)
 * Amazon Simple Storage Service (S3)
 * DynamoDB 
 * Elastic Compute Cloud (EC2)
 * Linux
+* AWS CLI
 
 ## Usage
 
