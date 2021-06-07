@@ -1,3 +1,4 @@
+
 # Deep Thoughts - an AWS project [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 An application using AWS cloud services for storage, database and deployment. As a user, save deep thoughts and corresponding images to your profile. View other user's input.
@@ -22,6 +23,7 @@ An application using AWS cloud services for storage, database and deployment. As
 ## Usage
 
 URL - 
+![Screen Shot 2021-06-07 at 5 15 30 PM](https://user-images.githubusercontent.com/71281652/121094980-15949880-c7b5-11eb-88c6-b6fd66dc261a.png)
 
 
 ## Resources
